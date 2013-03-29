@@ -1,0 +1,19 @@
+{% if cities_list %}
+    <ul>
+    {% for city in cities_list %}
+        <li>{{ city.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No cities are available.</p>
+{% endif %}
+
+{% if types_list %}
+    <ul>
+    {% for type_travel in types_list %}
+        <li>{{ type_travel.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Travel types are available.</p>
+{% endif %}
