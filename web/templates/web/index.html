@@ -56,8 +56,24 @@
         	<div class="icon_wrapper">	
             	<div class="place_icon"></div>
             </div>
-          <input type="text" placeholder="*Select a city" name="city" id="city" autocomplete="off">
-        
+            
+          <!--input type="text" placeholder="*Select a city" name="city" id="city" autocomplete="off"-->
+          <div class="custom-select-container">
+            <div aria-hidden="true" class="custom dropdown small current">*City</div>
+            <div class="custom selector"></div>
+            {% if cities_list %}
+                <select class="search-option small" name="city" id="city">
+                {% for city in cities_list %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                {% endfor %}
+                </select>
+            {% else %}
+                <p>No cities are available.</p>
+            {% endif %}
+            
+             <span class="search-area-icon"></span>
+          </div>
+          
         </div>
 
         <div class="input-wrapper">
@@ -114,12 +130,16 @@
           <div class="custom-select-container">
             <div aria-hidden="true" class="custom dropdown small current">*Budget</div>
             <div class="custom selector"></div>
-            <select class="search-option small" name="guests" id="guests">
-              <option value="1">chepeast</option>
-<option value="2">Economy</option>
-<option value="3">Luxurious</option>
-
+            {% if budget_list %}
+            <select class="search-option small" name="budget" id="budget">
+                {% for budget in budget_list %}
+                    <option value="{{ budget.id }}">{{ budget.name }}</option>
+                {% endfor %}
             </select>
+            {% else %}
+                <p>No budgets are available.</p>
+            {% endif %}
+            
              <span class="search-area-icon"></span>
           </div>
         </div>
