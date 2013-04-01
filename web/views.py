@@ -33,7 +33,7 @@ def itinerary(request):
         month_to = month_list[to_date.month-1]
         type_travel_id = request.POST.getlist('type_travel')
         
-        places_list = place.objects.order_by('name')[:date_sub_days_max*5]
+        places_list = place.objects.order_by('name')[:5]
         context = {'type_travel_id': type_travel_id, 'cities_list':cities_list,'places_list':places_list, 'budget_list':budget_list, 'types_list':types_list, 'date_sub_days':date_sub_days, 'from_date': from_date, 'to_date':to_date, 'month_from':month_from, 'month_to':month_to, 'date_sub_days_max': date_sub_days_max}
         return render(request, 'web/itinerary.html', context)
     else:
