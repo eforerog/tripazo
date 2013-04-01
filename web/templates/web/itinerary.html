@@ -26,9 +26,8 @@
  
 </head> 
  
-<body>
- 
-
+<body onLoad="init({{date_sub_days_max}})">
+{{type_travel_id}}
 <div id="wrap">
 	<div id="header">
     	<div class="center">
@@ -138,192 +137,130 @@
        </div>
     
     </div>
-    
     <!-- Content here-->
     <div class="container">
     	<div class="itinerary_title">
         	<h1>BASED OF <span>YOUR PREFERENCES</span>, THESE ARE PLACES TO GO</h1>
-            <div class="fromTo"><span class="month"> FROM FEB</span><h4 class="number">21 </h4>
+            <div class="fromTo"><span class="month"> FROM {{month_from}}</span><h4 class="number">{{from_date.day}} </h4>
             <span class="num">ST</span>
-            <span class="month">TO FEB</span><h4 class="number">23 </h4>
+            <span class="month">TO {{month_to}}</span><h4 class="number">{{to_date.day}} </h4>
             <span class="num">ST</span>
             </div>
         </div>
-    	
-        <!--- ITINERARY DAYS-->
-        <div id="itinerary_day">
-        	<div class="label">DAY 1</div>
-            <div id="weather_container"></div>
-            <a href="#" class="map"></a>
+    	{% for i in date_sub_days %}
+        	 <!--- ITINERARY DAYS-->
+        <div class="inner_container">
+            <div id="itinerary_day">
+        	<div class="label">DAY {{i}}</div>
+            <div id="weather_container" style="display:none;"></div>
+            <a href="#" class="map" style="display:none;"></a>
             <div class="clear"></div>
-<!-- "previous page" action -->
-<a class="prev browse left disabled"></a>
-
-<!-- root element for scrollable -->
-<div id="scrollable" class="scrollable">
-
-  <!-- root element for the items -->
-  <div class="items">
-
-    <!-- 1-5 -->
-    <div>
-      <div class="itinerary_item">
-      	<div class="ico yellow place"></div>
-        <a href="options" class="deploy">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-        <div id="options">
-       		<a href="#" class="">
-            	<span>info</span>
-            	<div class="icon_wrapper">	
-            	<div class="info"></div>
-           	 </div>
-             
-            </a>
-            <a href="#" class="">
-            	<span>more places</span>
-            	<div class="icon_wrapper">	
-            	<div class="more_places"></div>
-           	 </div>
-             
-            </a>
-            <a href="#" class="">
-            	<span>close</span>
-            	<div class="icon_wrapper">	
-            	<div class="close"></div>
-           	 </div>
-             
-            </a>
-        </div>
-      </div>
-      
-    
-      
-      
-      <div class="itinerary_item">
-      	<div class="ico grey food"></div>
-          <a href="options" class="deploy">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-      <div class="itinerary_item">
-      	<div class="ico yellow place"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>GRAND CENTRAL STATION</p>
-        </a>
-      </div>
-      <div class="itinerary_item">
-      	<div class="ico yellow place"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-      <div class="itinerary_item">
-      	<div class="ico grey food"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-    </div>
-
-    <!-- 5-10 -->
-    <div>
-     <div class="itinerary_item">
-      	<div class="ico grey food"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-    </div>
-
-
-  </div>
-
-</div>
-
-<!-- "next page" action -->
-<a class="next browse right"></a>
-</div>
-
-		<!--- ITINERARY DAYS-->
-        <div id="itinerary_day">
-        	<div class="label">DAY 2</div>
-            <div id="weather_container"></div>
-            <div class="clear"></div>
-<!-- "previous page" action -->
-<a class="prev browse left disabled"></a>
-
-<!-- root element for scrollable -->
-<div id="scrollable" class="scrollable">
-
-  <!-- root element for the items -->
-  <div class="items">
-
-    <!-- 1-5 -->
-    <div>
-      <div class="itinerary_item">
-      	<div class="ico yellow place"></div>
-        <a href="options" class="deploy">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
+            <!-- "previous page" action -->
+            <a class="prev browse left disabled"></a>
+            
+            <!-- root element for scrollable -->
+            <div id="scrollable" class="scrollable">
+            
+              <!-- root element for the items -->
+              <div class="items">
+            
+                <!-- 1-5 -->
+                <div>
+                  
+                {% if places_list %}
+                  
+                  {% for place in places_list %}
+                  		
+                        <div class="itinerary_item">
+                            <div class="ico yellow place"></div>
+                            
+                            	<img onClick="expand_detail(1, {{i}}, {{date_sub_days_max}})" src="{{place.photo_url1}}" alt="Pic" width="123" height="124"/>
+                          <!--
+                            	<img onClick="expand_detail(1, {{i}}, {{date_sub_days_max}})" src="{{STATIC_URL}}images/itinerary_pic01.jpg" alt="Pic" />
+                           
+                             -->
+                            
+                            <p>{{place.name}}</p>
+                            
+                            <div id="options">
+                                <a href="#" class="">
+                                    <span>info</span>
+                                    <div class="icon_wrapper">	
+                                    <div class="info"></div>
+                                 </div>
+                                 
+                                </a>
+                                <a href="#" class="">
+                                    <span>more places</span>
+                                    <div class="icon_wrapper">	
+                                    <div class="more_places"></div>
+                                 </div>
+                                 
+                                </a>
+                                <a href="#" class="">
+                                    <span>close</span>
+                                    <div class="icon_wrapper">	
+                                    <div class="close"></div>
+                                 </div>
+                                 
+                                </a>
+                            </div>
+                          </div>
+                        
+                  {% endfor %}
+                  
+                  
+				{% else %}
+                	<p>No Places are available.</p>
+				{% endif %}
+                  
+                  
+                
+                </div>
+            
+                <!-- 5-10 -->
+            
+            
+              </div>
+            
+            </div>
+            
+            <!-- "next page" action -->
+            <a class="next browse right"></a>
+         </div>
         
-      </div>
-      <div class="itinerary_item">
-      	<div class="ico grey food"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-      <div class="itinerary_item">
-      	<div class="ico yellow place"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>GRAND CENTRAL STATION</p>
-        </a>
-      </div>
-      <div class="itinerary_item">
-      	<div class="ico yellow place"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-      <div class="itinerary_item">
-      	<div class="ico grey food"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-    </div>
-
-    <!-- 5-10 -->
-    <div>
-     <div class="itinerary_item">
-      	<div class="ico grey food"></div>
-        <a href="#">
-        <img src="images/itinerary_pic01.jpg" alt="Pic" />
-        <p>BREAKFAST</p>
-        </a>
-      </div>
-    </div>
-
-
-  </div>
-
-</div>
-
-<!-- "next page" action -->
-<a class="next browse right"></a>
-</div>
+        </div>
+            
+        <!-- expansion--->
+        <div class="expansion_pre" id="expansion_pre_{{i}}">
+          <div class="expansion">
+          	<div class="back"></div>
+            <div class="border_top"></div>
+            <div class="angle"></div>
+            <div class="center">
+                <h1 class="place_title">GRAND CENTRAL STATION</h1>
+                <div class="pic">
+                <img alt="Pic" src="{{STATIC_URL}}images/pic_info.jpg" />
+                </div>
+                <div class="col_center">
+                    <img alt="PMap" src="{{STATIC_URL}}images/map_goggle.jpg" />
+                    <ul>
+                        <li class="adress">Grand Central Terminal
+                            89 E 42nd Street
+    New York, NY 10017</li>
+                        <li class="mail"><a href="#">info@grandcentralterminal.com</a></li>
+                        <li class="phone">(212) 340-2583 / (718) 330-1234 </li>
+                    </ul>
+                </div>
+                <div class="col_right">
+                    <p><strong>Grand Central Terminal (GCT) </strong>—colloquially called Grand Central Station, or shortened to simply Grand Central—is a commuter rail terminal station at 42nd Street and Park Avenue in Midtown Manhattan in New York City, United States. Built by and named for the New York Central Railroad in the heyday of American long-distance passenger rail travel, it is the largest train station in the world by number of platforms:[3] 44, with 67 tracks along them. They are on two levels, both below ground, with 41 tracks on the upper level and 26 on the lower, though the total number of tracks along platforms and in rail yards exceeds 100. The terminal covers an area of 48 acres (19 ha).</p></div>
+            </div>
+            
+            </div>
+          </div>  
+    	{% endfor %}
+        
+        
     
     <div class="action_buttons">
     	<a href="" class="btn">share your plan</a>
@@ -335,33 +272,10 @@
     
     </div>
   	
-      <!-- expansion--->
-      <div class="expansion">
-      	<div class="border_top"></div>
-      	<div class="angle"></div>
-        <div class="center">
-        	<h1 class="place_title">GRAND CENTRAL STATION</h1>
-            <div class="pic">
-           	<img alt="Pic" src="images/pic_info.jpg" />
-            </div>
-            <div class="col_center">
-            	<img alt="PMap" src="images/map_goggle.jpg" />
-                <ul>
-                	<li class="adress">Grand Central Terminal
-						89 E 42nd Street
-New York, NY 10017</li>
-					<li class="mail"><a href="#">info@grandcentralterminal.com</a></li>
-                    <li class="phone">(212) 340-2583 / (718) 330-1234 </li>
-                </ul>
-            </div>
-            <div class="col_right">
-            	<p><strong>Grand Central Terminal (GCT) </strong>—colloquially called Grand Central Station, or shortened to simply Grand Central—is a commuter rail terminal station at 42nd Street and Park Avenue in Midtown Manhattan in New York City, United States. Built by and named for the New York Central Railroad in the heyday of American long-distance passenger rail travel, it is the largest train station in the world by number of platforms:[3] 44, with 67 tracks along them. They are on two levels, both below ground, with 41 tracks on the upper level and 26 on the lower, though the total number of tracks along platforms and in rail yards exceeds 100. The terminal covers an area of 48 acres (19 ha).</p></div>
-        </div>
-      </div>  
 
 	<div id="footer">
     	<div id="bar">
-        	<p>© TRilpTrip.com</p>
+        	<p>© Tripazo.com</p>
             <ul class="social">
             	<li><a class="tw" href="#">Twitter</a></li>
                 <li><a class="fb" href="#">Facebook</a></li>

@@ -66,7 +66,7 @@ p span { font-size:28px}
 .ico { width:38px !important; height:38px !important}
 .grey { background-color:#313131 !important}
 .yellow { background-color:#ffdd00 !important}
-.place {    background-image: url("../images/sprite_icons.png") !important;
+.place {   /* background-image: url("../images/sprite_icons.png") !important;*/
     background-position: 8px -82px !important;
     background-repeat: no-repeat !important;}
 .food {    background-image: url("../images/sprite_icons.png") !important;
@@ -171,6 +171,11 @@ float:left }
 .container {
     margin: 0 auto;
     position: relative;
+    /* width: 960px; */
+}
+
+.inner_container {
+	margin: 0 auto;
     width: 960px;
 }
 .container.container-full-width {
@@ -327,7 +332,7 @@ float:left }
     padding: 8px 16px 8px 40px;
 }
 
-.req { color:#fff; text-shadow:none; font-family: 'Raleway',sans-serif; font-size:16px; float:right; display:block; margin-top:20px}
+.req { color:#fff; text-shadow:none; font-family: 'Raleway',sans-serif; font-size:16px; float:right; display:block; margin-top:10px}
 .search-area-icon {
   background: url("../images/sprite_icons.png") no-repeat scroll -143px -17px transparent;
     cursor: pointer;
@@ -721,6 +726,13 @@ a.map:hover {opacity:0.8; filter:alpha(opacity=80)}
     text-transform: uppercase;
 	    line-height: 13px;
 }
+#itinerary_day .items div .itinerary_item p { color: #4D4D4D;
+    font-size: 13px;
+    margin-top: 1px;
+    padding: 5px 0;
+    text-transform: uppercase;
+	    line-height: 13px;
+}
 /* active item */
 #itinerary_day .scrollable .active {
     border:2px solid #000;
@@ -800,14 +812,19 @@ a.map:hover {opacity:0.8; filter:alpha(opacity=80)}
 	
 /*----------------------------------------EXPANSION INFO-----------------------------------------*/
 
-.expansion { position:absolute; z-index:500; background:url(../images/bk_expansion.jpg); height:356px; width:100%;
+.expansion_pre { 
+	position:relative; height: 0px; width:100%; -webkit-transition-duration:1s; -moz-transition-duration:1s; transition-duration:1s; -o-transition-duration:1s; overflow:hidden;
+}
+.expansion { position:relative;  background:url(../images/bk_expansion.jpg); height:390px; width:100%; overflow:hidden;
 border-bottom:2px solid #a7a7a7  }
-.expansion .border_top { background:url(../images/bk_top_expansion.jpg) repeat-x; height:13px}
+.expansion .back {position:absolute; top:0px; width:100%; height:19px; background-color:#ffffff;}
+.expansion .center { position:relative; top:19px;}
+.expansion .border_top { background:url(../images/bk_top_expansion.jpg) repeat-x; height:13px; position: relative; top: 19px;}
 .expansion .angle {  background: url("../images/angle.png") no-repeat scroll 0 0 transparent;
     height: 31px;
     left: 50%;
     position: absolute;
-    top: -19px;
+    top: 0px;
     width: 66px;}
 .expansion h1.place_title { color:#fff;font-family: 'Raleway',sans-serif; font-size:25px;
 margin: 10px 0;}
@@ -826,8 +843,8 @@ border-bottom:1px solid #8b8b8b; color:#fff;padding-left: 30px;
 .expansion .col_center ul li a {font-family: 'Raleway',sans-serif; font-size:12px; color:#ffde00;
 text-decoration:none}
 .expansion .col_center ul li a:hover { color:#000}
-.expansion .col_right { float:left; width:323px}
-.expansion .col_right p {font-family: 'Raleway',sans-serif; color:#b1b1b1; font-size:14px}
+.expansion .col_right { float:left; width:323px; height:240px;}
+.expansion .col_right p {font-family: 'Raleway',sans-serif; color:#b1b1b1; font-size:14px; height: 300px; overflow-x: auto; text-align: justify;}
 .expansion .col_right p strong { font-size:18px}
 /*---------------------------------------- END EXPANSION INFO-----------------------------------------*/
 	

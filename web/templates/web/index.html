@@ -48,7 +48,7 @@
         
         <div class="search-bar">
     	<div class="container">
-    	    
+    	<div class="inner_container">
     <!-- Form-->
     	<form  id="search_form" action="itinerary" method="POST">
         {% csrf_token %}
@@ -105,8 +105,8 @@
                     	{% if types_list %}
                         <li>   
                             {% for type_travel in types_list %}
-                                <label onclick="" class="input-control checkbox">
-                			<input type="checkbox" value="1" >
+                                <label onClick="" class="input-control checkbox">
+                			<input type="checkbox" name="type_travel" value="{{ type_travel.name }}" >
                 			<span class="helper">{{ type_travel.name }}</span>
                 			</label>
                             {% endfor %}
@@ -149,6 +149,7 @@
         </button>
       </form>
       	</div>
+        </div>
     	
        </div>
        
