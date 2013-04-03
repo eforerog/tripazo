@@ -33,8 +33,23 @@ def itinerary(request):
         month_to = month_list[to_date.month-1]
         type_travel_id = request.POST.getlist('type_travel')
         
-        places_list = place.objects.order_by('name')[:5]
-        context = {'type_travel_id': type_travel_id, 'cities_list':cities_list,'places_list':places_list, 'budget_list':budget_list, 'types_list':types_list, 'date_sub_days':date_sub_days, 'from_date': from_date, 'to_date':to_date, 'month_from':month_from, 'month_to':month_to, 'date_sub_days_max': date_sub_days_max}
+        places_list = place.objects.order_by('name')[:5*(date_sub_days_max+1)]
+        _counter_col = 0
+        _counter_row = 0
+        place_array = []
+        place_array.append([])
+        for place_for in places_list:
+            if _counter_col < 5:
+                place_array[_counter_row].append(place_for)
+                _counter_col += 1
+            else:
+                _counter_col = 1
+                _counter_row += 1
+                place_array.append([])
+                place_array[_counter_row].append(place_for)
+            
+        
+        context = {'type_travel_id': type_travel_id, 'cities_list':cities_list,'places_list':place_array, 'budget_list':budget_list, 'types_list':types_list, 'date_sub_days':date_sub_days, 'from_date': from_date, 'to_date':to_date, 'month_from':month_from, 'month_to':month_to, 'date_sub_days_max': date_sub_days_max}
         return render(request, 'web/itinerary.html', context)
     else:
         context = {'cities_list':cities_list,'places_list':places_list, 'budget_list':budget_list, 'types_list':types_list}

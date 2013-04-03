@@ -148,11 +148,13 @@
             </div>
         </div>
         
-    	{% for i in date_sub_days %}
+    {% if places_list %}
+        
+        {% for place_group in places_list %}
         	 <!--- ITINERARY DAYS-->
         <div class="inner_container">
             <div id="itinerary_day">
-        	<div class="label">DAY {{i}}</div>
+        	<div class="label">DAY {{forloop.counter}}</div>
             <div id="weather_container" style="display:none;"></div>
             <a href="#" class="map" style="display:none;"></a>
             <div class="clear"></div>
@@ -168,17 +170,17 @@
                 <!-- 1-5 -->
                 <div>
                   
-                {% if places_list %}
+                
                   
-                  {% for place in places_list %}
+                  {% for place in place_group %}
                   		
                         <div class="itinerary_item">
                             <div class="ico yellow place"></div>
                             
-							{% if place.photo_url1 != null  %}
-                            	<img onClick="expand_detail(1, {{i}}, {{date_sub_days_max}})" src="{{place.photo_url1}}" alt="Pic" width="123" height="124"/>
+                            {% if place.photo_url1 != null  %}
+                            	<img onClick="expand_detail(1, {{forloop.parentloop.counter}}, {{date_sub_days_max}})" src="{{place.photo_url1}}" alt="Pic" width="123" height="124"/>
                             {% else %}
-                                <img onClick="expand_detail(1, {{i}}, {{date_sub_days_max}})" src="{{STATIC_URL}}images/itinerary_pic01.jpg" alt="Pic" />
+                                <img onClick="expand_detail(1, {{forloop.parentloop.counter}}, {{date_sub_days_max}})" src="{{STATIC_URL}}images/itinerary_pic01.jpg" alt="Pic" />
                             {% endif %}                            
                             	
                           <!--
@@ -216,9 +218,7 @@
                   {% endfor %}
                   
                   
-				{% else %}
-                	<p>No Places are available.</p>
-				{% endif %}
+				
                   
                   
                 
@@ -238,7 +238,7 @@
         </div>
             
         <!-- expansion--->
-        <div class="expansion_pre" id="expansion_pre_{{i}}">
+        <div class="expansion_pre" id="expansion_pre_{{forloop.counter}}">
           <div class="expansion">
           	<div class="back"></div>
             <div class="border_top"></div>
@@ -265,7 +265,9 @@
             </div>
           </div>  
     	{% endfor %}
-        
+    {% else %}
+        <p>No Places are available.</p>
+    {% endif %}
         
     
     <div class="action_buttons">
