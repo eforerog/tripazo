@@ -175,12 +175,14 @@
                   {% for place in place_group %}
                   		
                         <div class="itinerary_item">
-                            <div class="ico yellow place"></div>
+                            <div class="ico place white">
+                            <img src="{{place.icon}}" width="32" height="32" />    
+                            </div>
                             
                             {% if place.photo_url1 != null  %}
-                            	<img onClick="expand_detail(1, {{forloop.parentloop.counter}}, {{date_sub_days_max}})" src="{{place.photo_url1}}" alt="Pic" width="123" height="124"/>
+                            	<img onClick="expand_detail({{place.id}}, {{forloop.parentloop.counter}}, {{date_sub_days_max}}, {{forloop.counter}})" src="{{place.photo_url1}}" alt="Pic" width="123" height="124"/>
                             {% else %}
-                                <img onClick="expand_detail(1, {{forloop.parentloop.counter}}, {{date_sub_days_max}})" src="{{STATIC_URL}}images/itinerary_pic01.jpg" alt="Pic" />
+                                <img onClick="expand_detail({{place.id}}, {{forloop.parentloop.counter}}, {{date_sub_days_max}}, {{forloop.counter}})" src="{{STATIC_URL}}images/itinerary_pic01.jpg" alt="Pic" />
                             {% endif %}                            
                             	
                           <!--
@@ -242,7 +244,7 @@
           <div class="expansion">
           	<div class="back"></div>
             <div class="border_top"></div>
-            <div class="angle"></div>
+            <div class="angle" id="angle_{{forloop.counter}}"></div>
             <div class="center">
                 <h1 class="place_title">GRAND CENTRAL STATION</h1>
                 <div class="pic">

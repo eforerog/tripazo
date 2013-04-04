@@ -63,9 +63,10 @@ p span { font-size:28px}
 	margin:0 8px}
 .btn:hover {background: none repeat scroll 0 0 #000;color:#FFDE00;}
 /*icons itinerary*/
-.ico { width:38px !important; height:38px !important}
+.ico { width:34px !important; height:34px !important}
 .grey { background-color:#313131 !important}
 .yellow { background-color:#ffdd00 !important}
+.white { background-color:#ffffff        !important}
 .place {   /* background-image: url("../images/sprite_icons.png") !important;*/
     background-position: 8px -82px !important;
     background-repeat: no-repeat !important;}
@@ -698,11 +699,14 @@ a.map:hover {opacity:0.8; filter:alpha(opacity=80)}
 	position:relative;
 	text-align:center
  }
-#itinerary_day .items div .itinerary_item .ico {   box-shadow: 0 3px 0 0 #444;
+#itinerary_day .items div .itinerary_item .ico {   box-shadow: 0px 0px 2px 0 #444;
     left: 33%;
     position: absolute;
     top: -9px;
-	z-index: 10;}
+    z-index: 10;border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    padding: 2px;}
 #itinerary_day .items div .itinerary_item a { text-decoration:none}
 #itinerary_day .items div .itinerary_item a img { box-shadow:1px 1px 3px 1px #CCCCCC;
 -webkit-box-shadow:1px 1px 3px 1px #CCCCCC;
@@ -822,10 +826,15 @@ border-bottom:2px solid #a7a7a7  }
 .expansion .border_top { background:url(../images/bk_top_expansion.jpg) repeat-x; height:13px; position: relative; top: 19px;}
 .expansion .angle {  background: url("../images/angle.png") no-repeat scroll 0 0 transparent;
     height: 31px;
-    left: 50%;
+    margin-left: 50%;
+    left: 0px;
     position: absolute;
     top: 0px;
-    width: 66px;}
+    width: 66px;
+    -transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s; /* Firefox 4 */
+    -webkit-transition-duration: 0.5s; /* Safari and Chrome */
+    -o-transition-duration: 0.5s; /* Opera */}
 .expansion h1.place_title { color:#fff;font-family: 'Raleway',sans-serif; font-size:25px;
 margin: 10px 0;}
 .expansion .pic {box-shadow:0 0 2px -1px rgba(0, 0, 0, 0.8); float:left

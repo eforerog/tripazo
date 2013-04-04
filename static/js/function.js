@@ -10,9 +10,24 @@ function init(day_max) {
 	}
 }
 
-function expand_detail(id, day_n, day_max) {
-	//alert(day_max);
-	for(var i = 1; i <= day_max +1; i++)
+function expand_detail(id, day_n, day_max, column_id) {
+	//alert(column_id);
+	switch(column_id)
+        {
+            case 1: document.getElementById("angle_" + day_n).style.left = "-365px";
+                    break;
+            case 2: document.getElementById("angle_" + day_n).style.left = "-210px";
+                    break;
+            case 3: document.getElementById("angle_" + day_n).style.left = "-50px";
+                    break;
+            case 4: document.getElementById("angle_" + day_n).style.left = "110px";
+                    break;
+            case 5: document.getElementById("angle_" + day_n).style.left = "265px";
+                    break;
+        }
+        
+        
+        for(var i = 1; i <= day_max +1; i++)
 	{
 		if(i == day_n)
 		{
