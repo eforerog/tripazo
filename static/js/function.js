@@ -31,8 +31,8 @@ function expand_detail(id, day_n, day_max, column_id) {
 	{
 		if(i == day_n)
 		{
-			if(expand_state[i-1] == 0)
-			{
+			//if(expand_state[i-1] == 0)
+			//{
 				expand_state[i-1] = 1;
 				document.getElementById("expansion_pre_" + i).style.height = "400px";
                                 
@@ -54,12 +54,12 @@ function expand_detail(id, day_n, day_max, column_id) {
                                     
                                   //alert( "Data Saved: " + msg );
                                 });
-			}
-			else
-			{
-				expand_state[i-1] = 0;
-				document.getElementById("expansion_pre_" + i).style.height = "0px";
-			}
+			//}
+			//else
+			//{
+				//expand_state[i-1] = 0;
+				//document.getElementById("expansion_pre_" + i).style.height = "0px";
+			//}
 		}
 		else
 		{
