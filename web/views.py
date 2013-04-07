@@ -1,8 +1,9 @@
 # Create your views here.
 from array import array
+from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from django.utils import simplejson
 from web.models import city
 from web.models import type_travel
 from web.models import place
@@ -56,4 +57,24 @@ def itinerary(request):
         return render(request,'web/index.html',context)
         
    
-    
+def json_detail(request):
+    details = []
+    if request.method == 'GET':
+        place_id = request.GET.get('place_id','')
+        place_data = place.objects.get(id=place_id)
+        details.append({'latitude': str(place_data.latitude), 
+                    'longitude': str(place_data.longitude) , 
+                    'city': place_data.city,
+                    'name': place_data.name,
+                    'photo_url1': place_data.photo_url1,
+                    'reviews': place_data.reviews,
+                    'address': place_data.address,
+                    'telephone': place_data.telephone,
+                    'website': place_data.website})
+    #for co in place_data:
+        
+    json_data = simplejson.dumps(details)
+    return HttpResponse(
+        json_data, mimetype="application/json" 
+    )
+        

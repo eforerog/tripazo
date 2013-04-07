@@ -703,9 +703,7 @@ a.map:hover {opacity:0.8; filter:alpha(opacity=80)}
     left: 33%;
     position: absolute;
     top: -9px;
-    z-index: 10;border-color: #000000;
-    border-width: 2px;
-    border-style: solid;
+    z-index: 10;
     padding: 2px;}
 #itinerary_day .items div .itinerary_item a { text-decoration:none}
 #itinerary_day .items div .itinerary_item a img { box-shadow:1px 1px 3px 1px #CCCCCC;
@@ -847,7 +845,7 @@ margin: 10px 0;}
 border-bottom:1px solid #8b8b8b; color:#fff;padding-left: 30px; 
  line-height: 18px; font-weight:bold}
 .expansion .col_center ul li.adress { background-position: -260px -44px}
-.expansion .col_center ul li.mail {background-position:-260px -114px}
+.expansion .col_center ul li.mail {background-position:-260px -114px; word-wrap: break-word;}
 .expansion .col_center ul li.phone {background-position:-264px -179px; color:#ffde00}
 .expansion .col_center ul li a {font-family: 'Raleway',sans-serif; font-size:12px; color:#ffde00;
 text-decoration:none}

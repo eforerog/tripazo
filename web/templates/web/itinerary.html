@@ -246,21 +246,21 @@
             <div class="border_top"></div>
             <div class="angle" id="angle_{{forloop.counter}}"></div>
             <div class="center">
-                <h1 class="place_title">GRAND CENTRAL STATION</h1>
+                <h1 id="place_title_{{forloop.counter}}" class="place_title">GRAND CENTRAL STATION</h1>
                 <div class="pic">
-                <img alt="Pic" src="{{STATIC_URL}}images/pic_info.jpg" />
+                <img id="place_img_{{forloop.counter}}" alt="Pic" src="{{STATIC_URL}}images/pic_info.jpg" width="260" height="262" />
                 </div>
                 <div class="col_center">
                     <img alt="PMap" src="{{STATIC_URL}}images/map_goggle.jpg" />
                     <ul>
-                        <li class="adress">Grand Central Terminal
+                        <li id="address_{{forloop.counter}}" class="adress">Grand Central Terminal
                             89 E 42nd Street
     New York, NY 10017</li>
-                        <li class="mail"><a href="#">info@grandcentralterminal.com</a></li>
-                        <li class="phone">(212) 340-2583 / (718) 330-1234 </li>
+                        <li id="website_{{forloop.counter}}" class="mail"><a href="#">info@grandcentralterminal.com</a></li>
+                        <li id="phone_{{forloop.counter}}" class="phone">(212) 340-2583 / (718) 330-1234 </li>
                     </ul>
                 </div>
-                <div class="col_right">
+                <div id="content_div_{{forloop.counter}}" class="col_right">
                     <p><strong>Grand Central Terminal (GCT) </strong>—colloquially called Grand Central Station, or shortened to simply Grand Central—is a commuter rail terminal station at 42nd Street and Park Avenue in Midtown Manhattan in New York City, United States. Built by and named for the New York Central Railroad in the heyday of American long-distance passenger rail travel, it is the largest train station in the world by number of platforms:[3] 44, with 67 tracks along them. They are on two levels, both below ground, with 41 tracks on the upper level and 26 on the lower, though the total number of tracks along platforms and in rail yards exceeds 100. The terminal covers an area of 48 acres (19 ha).</p></div>
             </div>
             

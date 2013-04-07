@@ -35,6 +35,25 @@ function expand_detail(id, day_n, day_max, column_id) {
 			{
 				expand_state[i-1] = 1;
 				document.getElementById("expansion_pre_" + i).style.height = "400px";
+                                
+                                $.ajax({
+                                  type: "GET",
+                                  dataType : "json",
+                                  url: "json_detail",
+                                  data: { place_id: id },
+                                  success: function(data) {
+                                      //alert("prueba2: " + data[0].name);
+                                      document.getElementById("place_title_" + day_n).innerHTML = data[0].name;
+                                      document.getElementById("place_img_" + day_n).src = data[0].photo_url1;
+                                      document.getElementById("content_div_" + day_n).innerHTML = "<p><strong>" + data[0].name + "</strong> - " + data[0].reviews + "</p>";
+                                      document.getElementById("address_" + day_n).innerHTML = data[0].address;
+                                      document.getElementById("website_" + day_n).innerHTML = data[0].website;
+                                      document.getElementById("phone_" + day_n).innerHTML = data[0].telephone;
+                                      }
+                                
+                                    
+                                  //alert( "Data Saved: " + msg );
+                                });
 			}
 			else
 			{
