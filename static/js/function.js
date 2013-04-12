@@ -31,9 +31,9 @@ function expand_detail(id, day_n, day_max, column_id) {
 	{
 		if(i == day_n)
 		{
-			//if(expand_state[i-1] == 0)
-			//{
-				expand_state[i-1] = 1;
+			if(expand_state[i-1] == 0)
+			{
+				expand_state[i-1] = column_id;
 				document.getElementById("expansion_pre_" + i).style.height = "400px";
                                 
                                 $.ajax({
@@ -47,19 +47,23 @@ function expand_detail(id, day_n, day_max, column_id) {
                                       document.getElementById("place_img_" + day_n).src = data[0].photo_url1;
                                       document.getElementById("content_div_" + day_n).innerHTML = "<p><strong>" + data[0].name + "</strong> - " + data[0].reviews + "</p>";
                                       document.getElementById("address_" + day_n).innerHTML = data[0].address;
-                                      document.getElementById("website_" + day_n).innerHTML = data[0].website;
+                                      document.getElementById("website_" + day_n).innerHTML = "<a href=" + data[0].website + ">" + data[0].website +  "</a>";
                                       document.getElementById("phone_" + day_n).innerHTML = data[0].telephone;
                                       }
                                 
                                     
                                   //alert( "Data Saved: " + msg );
                                 });
-			//}
-			//else
-			//{
-				//expand_state[i-1] = 0;
-				//document.getElementById("expansion_pre_" + i).style.height = "0px";
-			//}
+			}
+			else
+			{
+                            if(expand_state[i-1]==column_id)
+                            {
+                                expand_state[i-1] = 0;
+				document.getElementById("expansion_pre_" + i).style.height = "0px";
+                            }
+				
+			}
 		}
 		else
 		{
