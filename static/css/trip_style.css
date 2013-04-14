@@ -849,10 +849,12 @@ border-bottom:1px solid #8b8b8b; color:#fff;padding-left: 30px;
 .expansion .col_center ul li.phone {background-position:-264px -179px; color:#ffde00}
 .expansion .col_center ul li a {font-family: 'Raleway',sans-serif; font-size:12px; color:#ffde00;
 text-decoration:none}
+.expansion .col_center img { border-color: white; border-width: 5px; border-style: solid;}
 .expansion .col_center ul li a:hover { color:#000}
 .expansion .col_right { float:left; width:323px; height:240px;}
 .expansion .col_right p {font-family: 'Raleway',sans-serif; color:#b1b1b1; font-size:14px; height: 300px; overflow-x: auto; text-align: justify;}
 .expansion .col_right p strong { font-size:18px}
+
 /*---------------------------------------- END EXPANSION INFO-----------------------------------------*/
 	
 	

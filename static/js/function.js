@@ -44,6 +44,7 @@ function expand_detail(id, day_n, day_max, column_id) {
     
                                 expand_state[i-1][column_id-1] = 1;
 				document.getElementById("expansion_pre_" + i).style.height = "400px";
+                                //scroll(0, 10 + 260*i);
                                 //alert("hola");
                                 $.ajax({
                                   type: "GET",
@@ -58,8 +59,8 @@ function expand_detail(id, day_n, day_max, column_id) {
                                       document.getElementById("address_" + day_n).innerHTML = data[0].address;
                                       document.getElementById("website_" + day_n).innerHTML = "<a href=" + data[0].website + ">" + data[0].website +  "</a>";
                                       document.getElementById("phone_" + day_n).innerHTML = data[0].telephone;
-                                      document.getElementById("im_map_" + day_n).src = "//maps.googleapis.com/maps/api/staticmap?center=" + data[0].latitude + "," + data[0].longitude + "&zoom=16&size=192x189&key=AIzaSyDYPvbfjDGq8iKqYPjd2w58GEjAQzdY87s&maptype=roadmap&markers=color:black%7C" + data[0].latitude + "," + data[0].longitude +"&sensor=false";
-                                      
+                                      //document.getElementById("im_map_" + day_n).src = "//maps.googleapis.com/maps/api/staticmap?center=" + data[0].latitude + "," + data[0].longitude + "&zoom=16&size=192x189&key=AIzaSyDYPvbfjDGq8iKqYPjd2w58GEjAQzdY87s&maptype=roadmap&markers=color:black%7C" + data[0].latitude + "," + data[0].longitude +"&sensor=false";
+                                      document.getElementById("im_map_" + day_n).src = "http://maps.googleapis.com/maps/api/staticmap?center=" + data[0].latitude + "," + data[0].longitude + "&zoom=15&size=182x179&markers=color:black%7C" + data[0].latitude + "," + data[0].longitude + "&sensor=false";
                                       }
                                 
                                     
