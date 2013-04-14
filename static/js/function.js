@@ -6,12 +6,16 @@ var expand_state = Array();
 function init(day_max) {
 	for(var i = 0; i <= day_max; i++)
 	{
-		expand_state.push(0);
+		expand_state.push(new Array());
+                expand_state[i].push(0);
+                expand_state[i].push(0);
+                expand_state[i].push(0);
+                expand_state[i].push(0);
+                expand_state[i].push(0);
 	}
 }
 
 function expand_detail(id, day_n, day_max, column_id) {
-	//alert(column_id);
 	switch(column_id)
         {
             case 1: document.getElementById("angle_" + day_n).style.left = "-365px";
@@ -31,24 +35,31 @@ function expand_detail(id, day_n, day_max, column_id) {
 	{
 		if(i == day_n)
 		{
-			if(expand_state[i-1] == 0)
+			if(expand_state[i-1][column_id-1] == 0)
 			{
-				expand_state[i-1] = column_id;
+                                for(var j = 0; j<=4; j++)
+                                {
+                                    expand_state[i-1][j] = 0;
+                                }
+    
+                                expand_state[i-1][column_id-1] = 1;
 				document.getElementById("expansion_pre_" + i).style.height = "400px";
-                                
+                                //alert("hola");
                                 $.ajax({
                                   type: "GET",
                                   dataType : "json",
                                   url: "json_detail",
                                   data: { place_id: id },
                                   success: function(data) {
-                                      //alert("prueba2: " + data[0].name);
+                                      //alert("prueba2: " + data[0].latitude);
                                       document.getElementById("place_title_" + day_n).innerHTML = data[0].name;
                                       document.getElementById("place_img_" + day_n).src = data[0].photo_url1;
                                       document.getElementById("content_div_" + day_n).innerHTML = "<p><strong>" + data[0].name + "</strong> - " + data[0].reviews + "</p>";
                                       document.getElementById("address_" + day_n).innerHTML = data[0].address;
                                       document.getElementById("website_" + day_n).innerHTML = "<a href=" + data[0].website + ">" + data[0].website +  "</a>";
                                       document.getElementById("phone_" + day_n).innerHTML = data[0].telephone;
+                                      document.getElementById("im_map_" + day_n).src = "https://maps.googleapis.com/maps/api/staticmap?center=" + data[0].latitude + "," + data[0].longitude + "&zoom=16&size=192x189&key=AIzaSyDYPvbfjDGq8iKqYPjd2w58GEjAQzdY87s&maptype=roadmap&markers=color:black%7C" + data[0].latitude + "," + data[0].longitude +"&sensor=false";
+                                      
                                       }
                                 
                                     
@@ -57,9 +68,9 @@ function expand_detail(id, day_n, day_max, column_id) {
 			}
 			else
 			{
-                            if(expand_state[i-1]==column_id)
+                            if(expand_state[i-1][column_id-1]==1)
                             {
-                                expand_state[i-1] = 0;
+                                expand_state[i-1][column_id-1] = 0;
 				document.getElementById("expansion_pre_" + i).style.height = "0px";
                             }
 				
@@ -68,14 +79,14 @@ function expand_detail(id, day_n, day_max, column_id) {
 		else
 		{
 			document.getElementById("expansion_pre_" + i).style.height = "0px";
-			expand_state[i-1] = 0;
+			expand_state[i-1][column_id-1] = 0;
 		}
 	
 	
 		
 	}
 	
-	if(expand_state[day_n-1] == 0)
+	if(expand_state[day_n-1][column_id] == 0)
 	{
 		//expand_state[day_n-1] = 1;
 		//document.getElementById("expansion_pre_" + day_n).style.height = "400px";
