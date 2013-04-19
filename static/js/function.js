@@ -189,35 +189,77 @@ $(document).ready(function() {
 /*background image rotator*/
 
 $(document).ready(function() {
-				$('#slideshow').cycle({
-				fx: 'fade',
-				 
-				pause:   1, 
-				speed: 1800,
-				timeout:  3500 
-			});			
-		});
+    
+    if(document.getElementById("slideshow"))
+    {
+                $('#slideshow').cycle({
+                fx: 'fade',
+                pause:   1, 
+                speed: 1800,
+                timeout:  3500 
+        });			
+    }
+});
 	
 /*jquery calendar calling*/
 $(function() {
-$( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
-$( "#datepicker2" ).datepicker({ dateFormat: 'dd-mm-yy' });
+$( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy',
+    beforeShow: function (textbox, instance) {   
+                instance.dpDiv.css({
+                    marginTop: (-textbox.offsetHeight) + 30 + 'px',
+                    marginLeft: textbox.offsetWidth + 'px'
+                });
+            }
+
+});
+$( "#datepicker2" ).datepicker({ dateFormat: 'dd-mm-yy',
+    beforeShow: function (textbox, instance) {   
+                instance.dpDiv.css({
+                    marginTop: (-textbox.offsetHeight) + 30 + 'px',
+                    marginLeft: textbox.offsetWidth + 155 + 'px'
+                });
+            }
+
+});
+
+$( "#datepicker3" ).datepicker({ dateFormat: 'dd-mm-yy',
+    beforeShow: function (textbox, instance) {   
+                instance.dpDiv.css({
+                    marginTop: (-textbox.offsetHeight) - 228 + 'px',
+                    marginLeft: textbox.offsetWidth + 198 + 'px'
+                });
+            }
+
+});
+$( "#datepicker4" ).datepicker({ dateFormat: 'dd-mm-yy',
+    beforeShow: function (textbox, instance) {   
+                instance.dpDiv.css({
+                    marginTop: (-textbox.offsetHeight) - 228 + 'px',
+                    marginLeft: textbox.offsetWidth + 338 + 'px'
+                });
+            }
+
+});
+
 });
 
 
 
 /*header stick top calling*/
  $(window).load(function(){
-      $("#header").sticky({ topSpacing: 0 });
-    });
+     if(document.getElementById("header"))
+     {
+         //$("#header").sticky({ topSpacing: 0 });
+     }      
+});
 	
 /*placeholder on IE */
     $(function(){
-      $(':input[placeholder]').placeholder();
+      //$(':input[placeholder]').placeholder();
     });
 	
 /*scroll itinerary*/
 $(function() {
   // initialize scrollable
-  $(".scrollable").scrollable();
+  //$(".scrollable").scrollable();
 });

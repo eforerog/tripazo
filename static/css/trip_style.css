@@ -277,7 +277,7 @@ float:left }
 	font-family: 'Raleway', sans-serif;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4) inset;
     float: left;
-    height: 23px;
+    height: 40px;
     margin: 0;
     width: 110px;
 }
@@ -519,7 +519,7 @@ background: none repeat scroll 0 0 #000000;
     width: 166px;
     z-index: 100;
 	display:none;}
-#search_form #budget_list ul li { padding:4px; border-bottom:1px solid #d0b400; margin:2px 0}
+#search_form #budget_list ul li { padding:4px; border-bottom:1px solid #d0b400; margin:2px 0; list-style-type: none;}
 #search_form #budget_list ul li:hover { background:#ffb000}
 #search_form #budget_list ul li.selected  { background:#ffb000}
 #search_form #budget_list ul li a {color: #655800;
@@ -569,7 +569,7 @@ background: none repeat scroll 0 0 #000000;
     width: 166px;
     z-index: 100;
 	display:none;}
-#search_form #city_list ul li { padding:4px; border-bottom:1px solid #d0b400; margin:2px 0}
+#search_form #city_list ul li { padding:4px; border-bottom:1px solid #d0b400; margin:2px 0; list-style-type: none;}
 #search_form #city_list ul li:hover { background:#ffb000}
 #search_form #city_list ul li.selected  { background:#ffb000}
 #search_form #city_list ul li a {color: #655800;
