@@ -106,6 +106,7 @@ p span { font-size:28px}
 #header .logo { text-indent:-9999px; width:109px;  height:22px; background:url(../images/tripazo_logo_small.png) no-repeat; display:block;
 float:left; margin-top: 7px; }
 #header #search_form .input-wrapper { margin-right: 4px;}
+#header #search_form .input-wrapper_iti { margin-right: 4px;}
 #header #search_form {  border: 0 none;
     float: right;
     margin-right: 28px;
@@ -273,6 +274,13 @@ float:left }
     margin-right: 19px;
     position: relative;
 }
+
+#search_form .input-wrapper_iti {
+    float: left;
+    margin-right: 19px;
+    position: relative;
+}
+
 #search_form input[type="text"] {
 	font-family: 'Raleway', sans-serif;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4) inset;
@@ -906,4 +914,9 @@ label{
     width: 150px;
     top: 41px;
     left: 40px;
+}
+
+.input-wrapper_iti label {
+    top: 35px;
+    left: 27px;
 }
