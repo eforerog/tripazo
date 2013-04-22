@@ -263,3 +263,28 @@ $(function() {
   // initialize scrollable
   //$(".scrollable").scrollable();
 });
+
+
+function select_city_list_index() {
+    document.getElementById("city_list").style.display = "block";
+}
+
+function city_select_ele(city_id, city_name) {
+    document.getElementById("city_list").style.display = "none";
+    $("#city").val(city_name);
+    $("#city_id").val(city_id);
+}
+
+function traveler_list_show() {
+    document.getElementById("traveler_list").style.display = "block";
+}
+
+function budget_city_list_index() {
+    document.getElementById("budget_list").style.display = "block";
+}
+
+function budget_select_ele(budget_id, budget_name) {
+    document.getElementById("budget_list").style.display = "none";
+    $("#budget").val(budget_name);
+    $("#budget_id").val(budget_id);
+}

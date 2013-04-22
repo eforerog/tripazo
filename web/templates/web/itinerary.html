@@ -13,6 +13,7 @@
 <script src="{{STATIC_URL}}js/function.js" type="text/javascript"></script>
 <script src="{{STATIC_URL}}js/jquery.cycle.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <!--
 <script type="text/javascript" src="{{STATIC_URL}}js/jquery.sticky.js"></script>
   <script>
@@ -22,7 +23,60 @@
   </script>
 <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 -->
- 
+<script>
+    
+jQuery.validator.addMethod("isValid", function (value, element) {
+    var startDate = $('#datepicker').val();
+    var t  = startDate.split(/\-|\s/);
+    ini_date = new Date(t.reverse().join('/'));
+    
+    var endDate = $('#datepicker2').val();
+    t  = endDate.split(/\-|\s/);
+    end_date = new Date(t.reverse().join('/'));
+    return Date.parse(ini_date,"dd-MM-yyyy") < Date.parse(end_date, "dd-MM-yyyy");
+}, "End date must be after start date");
+    
+$(function() {
+   $( "#search_form" ).validate({
+           rules: {
+                   city: {
+                           required: true
+                   },
+                   from: {
+                           required: true,
+                   },
+                   to: {
+                           required: true,
+                           isValid: true
+                   },
+                   type_travel : {
+                           required: true
+                   },
+                   budget : {
+                           required: true
+                   }
+           },
+           messages: {
+                   city: {
+                           required: "Select a city"
+                   },
+                   from: {
+                           required: "Select a start date"
+                   },
+                   to: {
+                           required: "Select a end date"
+                   },
+                   type_travel : {
+                           required: "Select a traveler type"
+                   },
+                   budget : {
+                           required: "Select a budget"
+                   }
+                   
+           }
+   });
+});
+</script>
 
  
 </head> 
@@ -39,18 +93,26 @@
         	<div class="icon_wrapper">	
             	<div class="place_icon"></div>
             </div>
-           <div class="city_type">*Select a city</div>
+          <input type="text" placeholder="City" name="city" id="city" autocomplete="off" onClick="select_city_list_index()">
+          <input type="hidden" name="city_id" id="city_id">
           <a href="login" class="search-area-icon drop3"></a>
 			<div id="city_list">	
             	<div class="indicator"></div>
-                	<ul>
-            			<li>
-                        	<a href="#">New York</a>
-                		</li>
-                       <li>
-                        	<a href="#">More coming soon...</a>
-                		</li>
-                	</ul>
+                	 {% if cities_list %}
+                    <ul>
+                        {% for city in cities_list %}
+                            <li>
+                                <a href="javascript:;" onClick="city_select_ele({{ city.id }},'{{ city.name }}');">{{ city.name }}</a>
+                            </li>
+                        {% endfor %}
+                                                        
+                            <li>
+                            <a>More coming soon...</a>
+                            </li>
+                    </ul>
+                {% else %}
+                    <p>No cities are available.</p>
+                {% endif %}
             </div>
         </div>
 
@@ -75,35 +137,23 @@
         	<div class="icon_wrapper">	
             	<div class="traveler_icon"></div>
             </div>
-          <div class="traveler_type">*Traveler type</div>
+          <div class="traveler_type" onClick="traveler_list_show();">Traveler type</div>
           <a href="login" class="search-area-icon drop"></a>
 			<div id="traveler_list">	
             	<div class="indicator"></div>
                 	<ul>
-            			<li>
-                        	<label onclick="" class="input-control checkbox">
-                			<input type="checkbox" value="1" >
-                			<span class="helper">First time here</span>
-                			</label>
-                		</li>
-                        <li>
-                        	<label onclick="" class="input-control checkbox">
-                			<input type="checkbox" value="1" >
-                			<span class="helper">First time here</span>
-                			</label>
-                		</li>
-                        <li>
-                        	<label onclick="" class="input-control checkbox">
-                			<input type="checkbox" value="1" >
-                			<span class="helper">First time here</span>
-                			</label>
-                		</li>
-                        <li class="selected">
-                        	<label onclick="" class="input-control checkbox">
-                			<input type="checkbox" value="1" >
-                			<span class="helper">First time here</span>
-                			</label>
-                		</li>
+            			{% if types_list %}
+                                <li>   
+                                    {% for type_travel in types_list %}
+                                        <label onClick="" class="input-control checkbox">
+                                                <input type="checkbox" name="type_travel" id="type_travel" value="{{ type_travel.name }}" >
+                                                <span class="helper">{{ type_travel.name }}</span>
+                                                </label>
+                                    {% endfor %}
+                                </li>    
+                                {% else %}
+                                    <p>No Travel types are available.</p>
+                                {% endif %}
                 	</ul>
             </div>
 
@@ -117,19 +167,25 @@
         	<div class="icon_wrapper">	
             	<div class="budget_icon"></div>
             </div>
-           <div class="budget_type">*Budget</div>
+           
+           <input type="text" placeholder="Budget" name="budget" id="budget" class="budget_type" autocomplete="off" onClick="budget_city_list_index()">
+           <input type="hidden" name="budget_id" id="budget_id">
           <a href="login" class="search-area-icon drop2"></a>
-			<div id="budget_list">	
-            	<div class="indicator"></div>
-                	<ul>
-            			<li>
-                        	<a href="#">Chep</a>
-                		</li>
-                       <li>
-                        	<a href="#">Luxorious</a>
-                		</li>
-                	</ul>
-            </div>
+			 {% if budget_list %}
+                        <div id="budget_list">	
+                            <div class="indicator"></div>
+                            <ul>
+                                {% for budget in budget_list %}
+                                <li>
+                                    <a href="javascript:;" onClick="budget_select_ele({{ budget.id }},'{{ budget.name }}');">{{ budget.name }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        {% else %}
+                            <p>No budgets are available.</p>
+                        {% endif %}
         </div>
         <!--<span class="req">(*) required fields</span>-->
         <button id="submit_location"  type="submit">
@@ -145,9 +201,32 @@
         	<h1>BASED OF <span>YOUR PREFERENCES</span>, THESE ARE PLACES TO GO</h1>
             <div class="fromTo"><span class="month"> FROM {{month_from}}</span><h4 class="number">{{from_date.day}} </h4>
             <span class="num"></span>
-            <!--span class="num">ST</span-->
+            {% if from_date.day == 1 %}
+                <span class="num">ST</span>
+            {% endif %}
+            {% if from_date.day == 2 %}
+                <span class="num">ND</span>
+            {% endif %}
+            {% if from_date.day == 3 %}
+                <span class="num">RD</span>
+            {% endif %}
+            {% if from_date.day >= 4 %}
+                <span class="num">TH</span>
+            {% endif %}
             <span class="month">TO {{month_to}}</span><h4 class="number">{{to_date.day}} </h4>
-            <span class="num"></span>
+            <span class="num"></span> 
+            {% if to_date.day == 1 %}
+                <span class="num">ST</span>
+            {% endif %}
+            {% if to_date.day == 2 %}
+                <span class="num">ND</span>
+            {% endif %}
+            {% if to_date.day == 3 %}
+                <span class="num">RD</span>
+            {% endif %}
+            {% if to_date.day >= 4 %}
+                <span class="num">TH</span>
+            {% endif %}
             </div>
         </div>
         

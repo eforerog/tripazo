@@ -24,7 +24,7 @@ def itinerary(request):
     types_list = type_travel.objects.order_by('name')
     budget_list = budget.objects.order_by('name')
     if request.method == 'POST':
-        city_id = request.POST.get('city','')
+        city_id = request.POST.get('city_id','')
         from_date = datetime.strptime(request.POST.get('from',''),'%d-%m-%Y')
         to_date = datetime.strptime(request.POST.get('to',''),'%d-%m-%Y')
         date_sub = to_date - from_date
@@ -33,7 +33,7 @@ def itinerary(request):
         month_from = month_list[from_date.month-1]
         month_to = month_list[to_date.month-1]
         type_travel_id = request.POST.getlist('type_travel')
-        
+        budget_id = request.POST.get('budget_id','')
         places_list = place.objects.order_by('name')[:5*(date_sub_days_max+1)]
         _counter_col = 0
         _counter_row = 0
