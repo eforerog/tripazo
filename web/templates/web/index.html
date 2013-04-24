@@ -106,7 +106,7 @@
                         <li>   
                             {% for type_travel in types_list %}
                                 <label onClick="" class="input-control checkbox">
-                			<input type="checkbox" name="type_travel" value="{{ type_travel.name }}" >
+                			<input type="checkbox" name="type_travel" value="{{ type_travel.id }}" >
                 			<span class="helper">{{ type_travel.name }}</span>
                 			</label>
                             {% endfor %}
@@ -133,7 +133,7 @@
             {% if budget_list %}
             <select class="search-option small" name="budget" id="budget">
                 {% for budget in budget_list %}
-                    <option value="{{ budget.id }}">{{ budget.name }}</option>
+                    <option value="{{ budget.name }}">{{ budget.name }}</option>
                 {% endfor %}
             </select>
             {% else %}
@@ -143,9 +143,8 @@
              <span class="search-area-icon"></span>
           </div>
         </div>
-        <span class="req">(*) required fields</span>
         <button id="submit_location"  type="submit">
-          create itineray
+          Create itineray
         </button>
       </form>
       	</div>
@@ -156,10 +155,10 @@
        
     </div>
     
-
+<!-- 
 	<div id="footer">
     	<div id="bar">
-        	<p>© TRilpTrip.com</p>
+        	<p>© Tripazo.com</p>
             <ul class="social">
             	<li><a class="tw" href="#">Twitter</a></li>
                 <li><a class="fb" href="#">Facebook</a></li>
@@ -168,6 +167,7 @@
         </div>
     </div>
 </div>
- 
+--> 
+
 </body>
 </html>

@@ -6,4 +6,12 @@ local_settings.py
 =======
 venv
 *.pyc
+.project
+.pydevproject
+# OS generated files #
+.DS_Store*
+*.sql
+
 >>>>>>> tripazo
+
+
