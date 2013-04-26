@@ -189,7 +189,7 @@ $(function() {
         </div>
         <!--<span class="req">(*) required fields</span>-->
         <button id="submit_location"  type="submit">
-          create itineray
+          Create itineray
         </button>
       </form>
        </div>
@@ -200,6 +200,7 @@ $(function() {
     	<div class="itinerary_title">
         	<h1>BASED OF <span>YOUR PREFERENCES</span>, THESE ARE PLACES TO GO</h1>
             <div class="fromTo"><span class="month"> FROM {{month_from}}</span><h4 class="number">{{from_date.day}} </h4>
+
             <span class="num"></span>
             {% if from_date.day == 1 %}
                 <span class="num">ST</span>
@@ -227,6 +228,7 @@ $(function() {
             {% if to_date.day >= 4 %}
                 <span class="num">TH</span>
             {% endif %}
+
             </div>
         </div>
         
@@ -272,7 +274,7 @@ $(function() {
                            
                              -->
                             
-                            <p>{{place.name}}</p>
+                            <p>{{place.ranking}} / Re: {{place.total_relevance}} / PB {{place.price_bonus}} /Ra {{place.rating}} / {{place.name}}</p>
                             
                             <div id="options">
                                 <a href="#" class="">

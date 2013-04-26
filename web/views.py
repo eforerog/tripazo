@@ -6,9 +6,14 @@ from django.shortcuts import render
 from django.utils import simplejson
 from web.models import city
 from web.models import type_travel
+from web.models import type
 from web.models import place
+from web.models import place_relevance
 from web.models import budget
 from datetime import datetime
+from django.db.models import Q
+import math
+from decimal import Decimal 
 
 def index(request):
     cities_list = city.objects.order_by('name')
@@ -33,8 +38,64 @@ def itinerary(request):
         month_from = month_list[from_date.month-1]
         month_to = month_list[to_date.month-1]
         type_travel_id = request.POST.getlist('type_travel')
-        budget_id = request.POST.get('budget_id','')
-        places_list = place.objects.order_by('name')[:5*(date_sub_days_max+1)]
+        budget_name=request.POST.get('budget')
+        
+        ##places_list is an array storing 5*duration-of-the-trip-(in days) activities.  
+        #places_list = place.objects.order_by('name')[:5*(date_sub_days_max+1)]
+        
+        #smart algorithm
+        #places_list = place.objects.filter(type='bowling_alley')[:5] 
+        #places_list = place.objects.filter(type="bowling_alley").order_by('-rating')[:10]
+             
+        #assigning price target to traveler budgets ("fuzzifier!") 
+        if budget_name=="Saver": #saver
+            target_price=Decimal(1)
+        elif budget_name=="On budget":#on budget
+            target_price=Decimal(2)
+        else:    #luxury/baller
+            target_price=Decimal(3.5)  
+        
+         
+        #my_traveler_type=[10,9,2]
+        my_traveler_type=type_travel_id
+        
+        #Select the traveler profile 
+        x = [ ]
+        for k in range(len(my_traveler_type)):
+        
+            y = type.objects.filter(type_travel_id=my_traveler_type[k])
+            #Select all activities from all google types related to the traveler profile
+            for i in range(len(y)):  #i hold the google type index
+                z = place.objects.filter(type=y[i].name) #select all objects with the i type 
+                for j in range(len(z)):
+                    # Set up price_bonus , it must be 0 if object has no prive_level info.  
+                    if z[j].price_level == 0: #When importing data Edgar set price_level to 0 when no data was avaialble
+                        z[j].price_bonus=Decimal(0)
+                    else:
+                        z[j].price_bonus=Decimal((-math.fabs(target_price-z[j].price_level))+1)
+                    #try to setup relavance. use specific relevance if extis, if not, use google type revelevan
+                    try:
+                        myobject=place_relevance.objects.filter(place_id=z[j].id)
+                        z[j].relevance=myobject[0].weight
+                    except IndexError:
+                        myobject=type.objects.filter(Q(name=y[i].name)&Q(type_travel_id=my_traveler_type[k]))
+                        z[j].relevance=myobject[0].weight
+                    
+                    #if rating is None, set it to 0 
+                    if z[j].rating is None:
+                        z[j].rating=Decimal(0)
+                        
+                    z[j].total_relevance = z[j].price_bonus + z[j].relevance
+                    z[j].ranking = (z[j].total_relevance + z[j].rating)/2
+                    
+                    #concatenate arrays to have all google types resutls in the same array x 
+                x.extend(z)
+        #sort results by relevance    
+        w=sorted(x, key=lambda place: -place.ranking)         
+        places_list=w[:5*(date_sub_days_max+1)]
+        
+        
+
         _counter_col = 0
         _counter_row = 0
         place_array = []
