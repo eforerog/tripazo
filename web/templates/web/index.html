@@ -110,7 +110,7 @@ $(function() {
             	<div class="place_icon"></div>
             </div>
             
-          <input type="text" placeholder="City" name="city" id="city" autocomplete="off" onClick="select_city_list_index()">
+          <input type="text" readonly="true" placeholder="City" name="city" id="city" autocomplete="off" onClick="select_city_list_index()">
           <input type="hidden" name="city_id" id="city_id">
           
           <div class="custom-select-container">
@@ -155,14 +155,14 @@ $(function() {
         	<div class="icon_wrapper">	
             	<div class="from_icon"></div>
             </div>
-          <input type="text" placeholder="From" name="from" class="input_short" id="datepicker">
+          <input type="text" readonly="true" placeholder="From" name="from" class="input_short" id="datepicker">
         
         </div>
         <div class="input-wrapper" >
         	<div class="icon_wrapper">	
             	<div class="to_icon"></div>
             </div>
-          <input type="text" placeholder="To" name="to" class="input_short" id="datepicker2">
+          <input type="text" readonly="true" placeholder="To" name="to" class="input_short" id="datepicker2">
         
         </div>
         
@@ -202,7 +202,7 @@ $(function() {
             </div>
           
             <!--div aria-hidden="true" class="custom dropdown small current" onClick="budget_city_list_index()">Budget</div-->
-            <input type="text" placeholder="Budget" name="budget" id="budget" autocomplete="off" onClick="budget_city_list_index()">
+            <input type="text" readonly="true" placeholder="Budget" name="budget" id="budget" autocomplete="off" onClick="budget_city_list_index()">
             <input type="hidden" name="budget_id" id="budget_id">
 <div class="custom selector"></div>
             {% if budget_list %}
