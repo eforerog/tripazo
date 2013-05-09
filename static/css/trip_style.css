@@ -614,7 +614,7 @@ background: none repeat scroll 0 0 #000000;
     position: relative;
     width: 654px;}
 .itinerary_title  span { color:#000} 
-.itinerary_title h1 {font-family: 'Raleway',sans-serif; font-size:23px; text-transform:uppercase}
+.itinerary_title h1 {font-family: 'Raleway',sans-serif; font-size:23px; text-transform:uppercase; text-align:center;}
 .itinerary_title .fromTo {    background: none repeat scroll 0 0 #FFFFFF;
     bottom: -3px;
     clear: both;
@@ -624,7 +624,8 @@ background: none repeat scroll 0 0 #000000;
     padding: 0 5px;
     position: absolute;
     text-transform: uppercase;
-    width: 389px;}
+    width: 389px;
+    text-align:center;}
 .itinerary_title .fromTo .number { color:#333333; font-size:53px; font-weight:bold; display:inline-block; display:inline}
 .itinerary_title .fromTo span.month {    color: #333333;
     display: inline-block;

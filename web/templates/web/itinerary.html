@@ -82,7 +82,6 @@ $(function() {
 </head> 
  
 <body onLoad="init({{date_sub_days_max}})">
-{{type_travel_id}}
 <div id="wrap">
 	<div id="header">
     	<div class="center">
@@ -189,7 +188,7 @@ $(function() {
         </div>
         <!--<span class="req">(*) required fields</span>-->
         <button id="submit_location"  type="submit">
-          Create itineray
+          Find Activities
         </button>
       </form>
        </div>
@@ -198,7 +197,20 @@ $(function() {
     <!-- Content here-->
     <div class="container">
     	<div class="itinerary_title">
-        	<h1>BASED OF <span>YOUR PREFERENCES</span>, THESE ARE PLACES TO GO</h1>
+    	  
+        	<h1>
+        	      {% if type_travel_id %}
+                  {% for i in type_traveler_id %}
+                    <span>{{ i.name }} AND </span>
+                  {% endfor %}
+                                                        
+                {% else %}
+                    <span>No Traveler types were selected...</span>
+                {% endif %}
+        	   	         	  
+        	  IDEAS FOR  <span>SAVER</span> TRAVELER XXX
+ 
+        	</h1>
             <div class="fromTo"><span class="month"> FROM {{month_from}}</span><h4 class="number">{{from_date.day}} </h4>
 
             <span class="num"></span>
@@ -317,8 +329,9 @@ $(function() {
             
             </div>
             
-            <!-- "next page" action -->
+            <!-- "next page" action 
             <a class="next browse right"></a>
+            -->
          </div>
         
         </div>

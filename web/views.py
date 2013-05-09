@@ -11,6 +11,7 @@ from web.models import place
 from web.models import place_relevance
 from web.models import budget
 from datetime import datetime
+from datetime import timedelta
 from django.db.models import Q
 import math
 from decimal import Decimal 
@@ -57,14 +58,17 @@ def itinerary(request):
         
          
         #my_traveler_type=[10,9,2]
+        print "Traveler type is"
+        print type_travel_id
+        user_type_list=type_travel.objects.filter(id=1)  #types selected by user in using the form in index.html. This will be use in itinerary.html 
+        
         my_traveler_type=type_travel_id
         
         #Select the traveler profile 
-        x = [ ]
+        x = [ ]     #temporal array to store activities objects 
         for k in range(len(my_traveler_type)):
-        
-            y = type.objects.filter(type_travel_id=my_traveler_type[k])
-            #Select all activities from all google types related to the traveler profile
+            ### get name of the traveler type and store it in array .....
+            y = type.objects.filter(type_travel_id=my_traveler_type[k]) #Select all activities from all google types related to the traveler profile
             for i in range(len(y)):  #i hold the google type index
                 z = place.objects.filter(type=y[i].name) #select all objects with the i type 
                 for j in range(len(z)):
@@ -88,28 +92,84 @@ def itinerary(request):
                     z[j].total_relevance = z[j].price_bonus + z[j].relevance
                     z[j].ranking = (z[j].total_relevance + z[j].rating)/2
                     
-                    #concatenate arrays to have all google types resutls in the same array x 
+                #concatenate arrays to have all google types resutls in the same array x 
                 x.extend(z)
         #sort results by relevance    
         w=sorted(x, key=lambda place: -place.ranking)         
+        #################################
+        ######Validating opening hours###########
+        #################################
+        
         places_list=w[:5*(date_sub_days_max+1)]
         
         
 
-        _counter_col = 0
-        _counter_row = 0
+        _counter_col = 0 
+        _counter_row = 0      #index to move through days in the itinerary 
         place_array = []
         place_array.append([])
         for place_for in places_list:
             if _counter_col < 5:
-                place_array[_counter_row].append(place_for)
                 _counter_col += 1
             else:
                 _counter_col = 1
                 _counter_row += 1
                 place_array.append([])
-                place_array[_counter_row].append(place_for)
             
+            my_first_day=from_date.weekday()  #date of the week when trip starts
+            this_day=(timedelta(days=_counter_row)+from_date).weekday()   #this_day stores the day of the week of the activity in the for loop. Monday is 0, Sunday is 6
+                     
+            if this_day == 0:
+                if place_for.opening_hours_0_open==0 and place_for.opening_hours_0_close==0:
+                    print place_for.name
+                    print "IS CLOSED"
+                    #do nothing, activity/place is closed
+                else:
+                    place_array[_counter_row].append(place_for)
+            elif this_day == 1:
+                if place_for.opening_hours_1_open==0 and place_for.opening_hours_1_close==0:
+                    print place_for.name
+                    print "IS CLOSED"
+                    #do nothing, activity/place is closed
+                else:
+                    place_array[_counter_row].append(place_for)
+            elif this_day == 2:
+                if place_for.opening_hours_2_open==0 and place_for.opening_hours_2_close==0:
+                    print place_for.name
+                    print "IS CLOSED"
+                    #do nothing, activity/place is closed
+                else:
+                    place_array[_counter_row].append(place_for)            
+            elif this_day == 3:
+                if place_for.opening_hours_3_open==0 and place_for.opening_hours_3_close==0:
+                    print place_for.name
+                    print "IS CLOSED"
+                    #do nothing, activity/place is closed
+                else:
+                    place_array[_counter_row].append(place_for)
+            elif this_day == 4:
+                if place_for.opening_hours_4_open==0 and place_for.opening_hours_4_close==0:
+                    print place_for.name
+                    print "IS CLOSED"
+                    #do nothing, activity/place is closed
+                else:
+                    place_array[_counter_row].append(place_for)
+            elif this_day == 5:
+                if place_for.opening_hours_5_open==0 and place_for.opening_hours_5_close==0:
+                    print place_for.name
+                    print "IS CLOSED"
+                    #do nothing, activity/place is closed
+                else:
+                    place_array[_counter_row].append(place_for)
+            elif this_day == 6:
+                if place_for.opening_hours_6_open==0 and place_for.opening_hours_6_close==0:
+                    print place_for.name
+                    print "IS CLOSED"
+                    #do nothing, activity/place is closed
+                else:
+                    place_array[_counter_row].append(place_for)
+
+
         
         context = {'type_travel_id': type_travel_id, 'cities_list':cities_list,'places_list':place_array, 'budget_list':budget_list, 'types_list':types_list, 'date_sub_days':date_sub_days, 'from_date': from_date, 'to_date':to_date, 'month_from':month_from, 'month_to':month_to, 'date_sub_days_max': date_sub_days_max}
         return render(request, 'web/itinerary.html', context)
