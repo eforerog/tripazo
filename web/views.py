@@ -39,7 +39,7 @@ def itinerary(request):
         month_from = month_list[from_date.month-1]
         month_to = month_list[to_date.month-1]
         type_travel_id = request.POST.getlist('type_travel')
-        budget_name=request.POST.get('budget')
+        budget_selected_name=request.POST.get('budget')
         
         ##places_list is an array storing 5*duration-of-the-trip-(in days) activities.  
         #places_list = place.objects.order_by('name')[:5*(date_sub_days_max+1)]
@@ -49,9 +49,9 @@ def itinerary(request):
         #places_list = place.objects.filter(type="bowling_alley").order_by('-rating')[:10]
              
         #assigning price target to traveler budgets ("fuzzifier!") 
-        if budget_name=="Saver": #saver
+        if budget_selected_name=="Saver": #saver
             target_price=Decimal(1)
-        elif budget_name=="On budget":#on budget
+        elif budget_selected_name=="On budget":#on budget
             target_price=Decimal(2)
         else:    #luxury/baller
             target_price=Decimal(3.5)  
@@ -60,14 +60,18 @@ def itinerary(request):
         #my_traveler_type=[10,9,2]
         print "Traveler type is"
         print type_travel_id
-        user_type_list=type_travel.objects.filter(id=1)  #types selected by user in using the form in index.html. This will be use in itinerary.html 
-        
+        #user_type_list=type_travel.objects.filter(id=1)   
+        selected_traveler_type_name = [ ] #types selected by user in using the form in index.html. This will be use in itinerary.html
         my_traveler_type=type_travel_id
         
         #Select the traveler profile 
         x = [ ]     #temporal array to store activities objects 
         for k in range(len(my_traveler_type)):
-            ### get name of the traveler type and store it in array .....
+            ### get name of the traveler type and store it in selected_traveler_type_name . Example [foodie, party]
+            temp = type_travel.objects.filter(id=my_traveler_type[k])[0]
+            selected_traveler_type_name.append(temp)
+            #print selected_traveler_type_name
+            
             y = type.objects.filter(type_travel_id=my_traveler_type[k]) #Select all activities from all google types related to the traveler profile
             for i in range(len(y)):  #i hold the google type index
                 z = place.objects.filter(type=y[i].name) #select all objects with the i type 
@@ -171,7 +175,7 @@ def itinerary(request):
 
 
         
-        context = {'type_travel_id': type_travel_id, 'cities_list':cities_list,'places_list':place_array, 'budget_list':budget_list, 'types_list':types_list, 'date_sub_days':date_sub_days, 'from_date': from_date, 'to_date':to_date, 'month_from':month_from, 'month_to':month_to, 'date_sub_days_max': date_sub_days_max}
+        context = {'budget_selected_name':budget_selected_name, 'selected_traveler_type_name': selected_traveler_type_name, 'cities_list':cities_list,'places_list':place_array, 'budget_list':budget_list, 'types_list':types_list, 'date_sub_days':date_sub_days, 'from_date': from_date, 'to_date':to_date, 'month_from':month_from, 'month_to':month_to, 'date_sub_days_max': date_sub_days_max}
         return render(request, 'web/itinerary.html', context)
     else:
         context = {'cities_list':cities_list,'places_list':places_list, 'budget_list':budget_list, 'types_list':types_list}

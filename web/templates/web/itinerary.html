@@ -197,19 +197,18 @@ $(function() {
     <!-- Content here-->
     <div class="container">
     	<div class="itinerary_title">
-    	  
-        	<h1>
-        	      {% if type_travel_id %}
-                  {% for i in type_traveler_id %}
-                    <span>{{ i.name }} AND </span>
+    	    <h1>{{budget_selected_name}} TRAVELER</h1><br>
+    	    <h1><span>OUR IDEAS FOR</span></h1><br>
+        	<h1>       	  
+        	  
+        	      {% if selected_traveler_type_name %}
+                  {% for i in selected_traveler_type_name %}
+                    +{{ i.name }} 
                   {% endfor %}
                                                         
                 {% else %}
-                    <span>No Traveler types were selected...</span>
+                    <span>No Traveler types were selected ZZZ...</span>
                 {% endif %}
-        	   	         	  
-        	  IDEAS FOR  <span>SAVER</span> TRAVELER XXX
- 
         	</h1>
             <div class="fromTo"><span class="month"> FROM {{month_from}}</span><h4 class="number">{{from_date.day}} </h4>
 

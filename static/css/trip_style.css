@@ -608,12 +608,12 @@ background: none repeat scroll 0 0 #000000;
 .itinerary_title {  border-bottom: 1px solid #959595;
     border-top: 1px solid #959595;
     color: #4D4D4D;
-    height: 64px;
+    height: 137px;
     margin: 87px auto;
     padding: 10px 0 0;
     position: relative;
     width: 654px;}
-.itinerary_title  span { color:#000} 
+.itinerary_title  span { color:#000; font-size:18px} 
 .itinerary_title h1 {font-family: 'Raleway',sans-serif; font-size:23px; text-transform:uppercase; text-align:center;}
 .itinerary_title .fromTo {    background: none repeat scroll 0 0 #FFFFFF;
     bottom: -3px;
@@ -622,7 +622,7 @@ background: none repeat scroll 0 0 #000000;
     height: 44px;
     left: 18%;
     padding: 0 5px;
-    position: absolute;
+    position: relative;
     text-transform: uppercase;
     width: 389px;
     text-align:center;}
