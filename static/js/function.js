@@ -3,6 +3,15 @@
 var expand_act = 0;
 var expand_state = Array();
 
+//In itinerary.html this function to hides transtition image and show main page
+function transitionMessage(){  
+  alert("ima here");
+  setTimeout(function(){
+    document.getElementById("transitionImage").style.display="none";
+    document.getElementById("wrap").style.display="block";
+  },3000)
+}
+
 function init(day_max) {
 	for(var i = 0; i <= day_max; i++)
 	{
@@ -288,3 +297,5 @@ function budget_select_ele(budget_id, budget_name) {
     $("#budget").val(budget_name);
     $("#budget_id").val(budget_id);
 }
+
+window.onload=transitionMessage();

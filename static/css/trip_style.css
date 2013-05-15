@@ -91,7 +91,16 @@ p span { font-size:28px}
 
  /*-----------------STYLE BASE-------------------------*/
 
-#wrap { width:100%}
+#wrap { width:100% }
+#transitionDiv {
+  position:absolute; 
+  left:0px;
+  top:0px;
+  z-index:1000;
+}
+#transitionDiv img{
+  width:100%
+}
 #header {
       background-image: url("../images/bk_branchome.jpg");
     background-repeat: no-repeat;

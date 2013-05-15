@@ -78,14 +78,25 @@ $(function() {
 });
 </script>
 
+<script>
+ //In itinerary.html this function to hides transtition image and show main page
+function transitionMessage(){  
+  setTimeout(function(){
+    document.getElementById("transitionDiv").style.display="none";
+    document.getElementById("wrap").style.display="block";
+  },2500)
+}
+window.onload=transitionMessage();
+</script> 
  
 </head> 
- 
 <body onLoad="init({{date_sub_days_max}})">
-<div id="wrap">
+<!-- Move style to style sheet when testing is ready  -->
+<div id="transitionDiv"><img src="{{STATIC_URL}}/images/transition_image.jpg"></div>
+<div id="wrap" style="display:none"> <!--display is changed by transitionMessage() JS function-->
 	<div id="header">
     	<div class="center">
-        	<a class="logo">Tripazo</a>
+        	<a class="logo" href="/web">Tripazo</a>
            	<form  id="search_form" action="itinerary"  method="POST">
                 {% csrf_token %}
         <div class="input-wrapper_iti">
