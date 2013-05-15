@@ -670,7 +670,7 @@ a.map {  background: url("../images/map.jpg") no-repeat scroll 0 0 transparent;
     width: 53px;}
 a.map:hover {opacity:0.8; filter:alpha(opacity=80)}
 #itinerary_day {    clear: both;
-    margin: 21px auto;
+    margin: 15px auto;
     overflow: hidden;
     width: 960px;}
 #itinerary_day .label { background: url("../images/sprite_icons.png") no-repeat scroll -152px 0 transparent;
