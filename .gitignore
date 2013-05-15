@@ -9,7 +9,7 @@ venv
 .project
 .pydevproject
 # OS generated files #
-.DS_Store
+*.DS_Store
 *.sql
 
 >>>>>>> tripazo
