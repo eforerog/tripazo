@@ -130,6 +130,11 @@ def itinerary(request):
                     #do nothing, activity/place is closed
                 else:
                     place_array[_counter_row].append(place_for)
+                    if place_for.opening_hours_0_open is not None:
+                        place_for.open=1  #place is open this day
+                        print "This place is open today"
+                    else:
+                        print "No info about opening hours for this place"
             elif this_day == 1:
                 if place_for.opening_hours_1_open==0 and place_for.opening_hours_1_close==0:
                     print place_for.name
@@ -137,13 +142,23 @@ def itinerary(request):
                     #do nothing, activity/place is closed
                 else:
                     place_array[_counter_row].append(place_for)
+                    if place_for.opening_hours_1_open is not None:
+                        place_for.open=1  #place is open this day
+                        print "This place is open today"
+                    else:
+                        print "No info about opening hours for this place"
             elif this_day == 2:
                 if place_for.opening_hours_2_open==0 and place_for.opening_hours_2_close==0:
                     print place_for.name
                     print "IS CLOSED"
                     #do nothing, activity/place is closed
                 else:
-                    place_array[_counter_row].append(place_for)            
+                    place_array[_counter_row].append(place_for) 
+                    if place_for.opening_hours_1_open is not None:
+                        place_for.open=2  #place is open this day
+                        print "This place is open today"
+                    else:
+                        print "No info about opening hours for this place"           
             elif this_day == 3:
                 if place_for.opening_hours_3_open==0 and place_for.opening_hours_3_close==0:
                     print place_for.name
@@ -151,6 +166,11 @@ def itinerary(request):
                     #do nothing, activity/place is closed
                 else:
                     place_array[_counter_row].append(place_for)
+                    if place_for.opening_hours_3_open is not None:
+                        place_for.open=1  #place is open this day
+                        print "This place is open today"
+                    else:
+                        print "No info about opening hours for this place"
             elif this_day == 4:
                 if place_for.opening_hours_4_open==0 and place_for.opening_hours_4_close==0:
                     print place_for.name
@@ -158,6 +178,11 @@ def itinerary(request):
                     #do nothing, activity/place is closed
                 else:
                     place_array[_counter_row].append(place_for)
+                    if place_for.opening_hours_4_open is not None:
+                        place_for.open=1  #place is open this day
+                        print "This place is open today"
+                    else:
+                        print "No info about opening hours for this place"
             elif this_day == 5:
                 if place_for.opening_hours_5_open==0 and place_for.opening_hours_5_close==0:
                     print place_for.name
@@ -165,6 +190,11 @@ def itinerary(request):
                     #do nothing, activity/place is closed
                 else:
                     place_array[_counter_row].append(place_for)
+                    if place_for.opening_hours_5_open is not None:
+                        place_for.open=1  #place is open this day
+                        print "This place is open today"
+                    else:
+                        print "No info about opening hours for this place"
             elif this_day == 6:
                 if place_for.opening_hours_6_open==0 and place_for.opening_hours_6_close==0:
                     print place_for.name
@@ -172,6 +202,11 @@ def itinerary(request):
                     #do nothing, activity/place is closed
                 else:
                     place_array[_counter_row].append(place_for)
+                    if place_for.opening_hours_6_open is not None:
+                        place_for.open=1  #place is open this day
+                        print "This place is open today"
+                    else:
+                        print "No info about opening hours for this place"
 
 
         

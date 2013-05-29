@@ -725,6 +725,13 @@ a.map:hover {opacity:0.8; filter:alpha(opacity=80)}
     top: -9px;
     z-index: 10;
     padding: 2px;}
+#itinerary_day .items div .itinerary_item .open {   box-shadow: 0px 0px 2px 0 #444;
+    left: 0;
+    position: absolute;
+    top: 99px;
+    z-index: 10;
+    padding: 2px;
+    width:126px;}
 #itinerary_day .items div .itinerary_item a { text-decoration:none}
 #itinerary_day .items div .itinerary_item a img { box-shadow:1px 1px 3px 1px #CCCCCC;
 -webkit-box-shadow:1px 1px 3px 1px #CCCCCC;

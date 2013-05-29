@@ -282,8 +282,17 @@ window.onload=transitionMessage();
                   		
                         <div class="itinerary_item">
                             <div class="ico place white">
-                            <img src="{{place.icon}}" width="32" height="32" />    
+                            <img src="{{place.icon}}" width="32" height="32" /> 
+                               
                             </div>
+                            
+                            {% if place.open %}
+                            
+                            <div class="open place white">
+                            OPEN 
+                            </div>
+                            
+                            {% endif %}
                             
                             {% if place.photo_url1 != null  %}
                             	<img onClick="expand_detail({{place.id}}, {{forloop.parentloop.counter}}, {{date_sub_days_max}}, {{forloop.counter}})" src="{{place.photo_url1}}" alt="Pic" width="123" height="124"/>
